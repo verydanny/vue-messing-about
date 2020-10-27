@@ -12,7 +12,7 @@ import { ESBuildPlugin, ESBuildMinifyPlugin } from "esbuild-loader"
 
 const PROD = process.env.NODE_ENV === "production"
 const DEV = process.env.NODE_ENV === "development"
-// const SERVER = process.env.NODE_CTX === "server"
+const SERVER = process.env.NODE_CTX === "server"
 const CLIENT = process.env.NODE_CTX === "client"
 
 const fiber = require("fibers")
@@ -94,6 +94,7 @@ const config = {
               },
             },
           },
+          PROD && SERVER && "ignore-loader",
         ].filter(Boolean) as Loader[],
       },
     ].filter(Boolean) as RuleSetRule[],
