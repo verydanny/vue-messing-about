@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import * as path from "path"
 
-import { Plugin, Configuration, Loader, RuleSetRule } from "webpack"
+import webpack, { Plugin, Configuration, Loader, RuleSetRule } from "webpack"
 import MiniCssExtract from "mini-css-extract-plugin"
 // @ts-ignore
 import VuetifyLoaderPlugin from "vuetify-loader/lib/plugin"
@@ -104,6 +104,7 @@ const config = {
 
 if (CLIENT && PROD) {
   config?.plugins?.push(
+    new VuetifyLoaderPlugin(),
     new ProgressBarPlugin(),
     new MiniCssExtract({
       filename: PROD ? "style.[hash].css" : "style.css",
