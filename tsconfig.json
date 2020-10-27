@@ -1,0 +1,42 @@
+{
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "declaration": true,
+    "declarationMap": true,
+    "moduleResolution": "node",
+    "downlevelIteration": true,
+    "emitDecoratorMetadata": true,
+    "esModuleInterop": true,
+    "strictNullChecks": true,
+    "noImplicitAny": false,
+    "sourceMap": true,
+    "noEmitOnError": false,
+    "experimentalDecorators": true,
+    "noUnusedParameters": true,
+    "noUnusedLocals": true,
+    "pretty": true,
+    "importHelpers": true,
+    "target": "ES2018",
+    "module": "ESNext",
+    "lib": [
+      "DOM",
+      "DOM.Iterable",
+      "ES2015",
+      "ES2016",
+      "ES2017",
+      "ES2018",
+      "ESNext.AsyncIterable"
+    ],
+    "typeRoots": [
+      "node_modules/@types",
+      "src/types"
+    ]
+  },
+  "include": [
+    "src/**/*",
+    "webpack/**/*"
+  ],
+  "files": [
+    "serve.ts",
+  ]
+}
