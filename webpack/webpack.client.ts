@@ -5,6 +5,7 @@ import VueSSRClientPlugin from "vue-server-renderer/client-plugin"
 // import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer"
 // @ts-ignore
 import VuetifyLoaderPlugin from "vuetify-loader/lib/plugin"
+import FriendlyErrorsPlugin from "friendly-errors-webpack-plugin"
 
 import base from "./webpack.base"
 
@@ -17,6 +18,12 @@ const config = merge(base, {
     "./src/client/entry.ts",
   ].filter(Boolean) as string[],
   plugins: [
+    new FriendlyErrorsPlugin({
+      compilationSuccessInfo: {
+        messages: ["Your CLIENT compilation was successful"],
+        notes: [],
+      },
+    }),
     // new VuetifyLoaderPlugin(),
     new webpack.DefinePlugin({
       "process.env.NODE_ENV": JSON.stringify(

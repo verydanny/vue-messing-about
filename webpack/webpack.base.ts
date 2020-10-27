@@ -5,7 +5,6 @@ import { Plugin, Configuration, Loader, RuleSetRule } from "webpack"
 import MiniCssExtract from "mini-css-extract-plugin"
 // @ts-ignore
 import VuetifyLoaderPlugin from "vuetify-loader/lib/plugin"
-import FriendlyErrorsPlugin from "friendly-errors-webpack-plugin"
 import ProgressBarPlugin from "progress-bar-webpack-plugin"
 import { VueLoaderPlugin } from "vue-loader"
 import { ESBuildPlugin, ESBuildMinifyPlugin } from "esbuild-loader"
@@ -16,8 +15,6 @@ const SERVER = process.env.NODE_CTX === "server"
 const CLIENT = process.env.NODE_CTX === "client"
 
 const fiber = require("fibers")
-
-console.log(CLIENT)
 
 const config = {
   mode: PROD ? ("production" as const) : ("development" as const),
@@ -99,11 +96,9 @@ const config = {
       },
     ].filter(Boolean) as RuleSetRule[],
   },
-  plugins: [
-    new ESBuildPlugin(),
-    new VueLoaderPlugin(),
-    new FriendlyErrorsPlugin(),
-  ].filter(Boolean) as Plugin[],
+  plugins: [new ESBuildPlugin(), new VueLoaderPlugin()].filter(
+    Boolean
+  ) as Plugin[],
 } as Configuration
 
 if (CLIENT && PROD) {

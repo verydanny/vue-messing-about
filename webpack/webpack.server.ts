@@ -2,6 +2,7 @@ import webpack from "webpack"
 import merge from "webpack-merge"
 import nodeExternals from "webpack-node-externals"
 import VueSSRServerPlugin from "vue-server-renderer/server-plugin"
+import FriendlyErrorsPlugin from "friendly-errors-webpack-plugin"
 
 import base from "./webpack.base"
 
@@ -19,6 +20,12 @@ export default merge(base, {
     allowlist: [/\.css$/, /^vuetify/],
   }),
   plugins: [
+    new FriendlyErrorsPlugin({
+      compilationSuccessInfo: {
+        messages: ["Your SERVER compilation was successful"],
+        notes: [],
+      },
+    }),
     new webpack.DefinePlugin({
       "process.env.NODE_ENV": JSON.stringify(
         process.env.NODE_ENV || "development"
