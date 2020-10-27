@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import * as path from "path"
 
-import webpack, { Plugin, Configuration, Loader, RuleSetRule } from "webpack"
+import { Plugin, Configuration, Loader, RuleSetRule } from "webpack"
 import MiniCssExtract from "mini-css-extract-plugin"
 // @ts-ignore
 import VuetifyLoaderPlugin from "vuetify-loader/lib/plugin"
@@ -12,10 +12,12 @@ import { ESBuildPlugin, ESBuildMinifyPlugin } from "esbuild-loader"
 
 const PROD = process.env.NODE_ENV === "production"
 const DEV = process.env.NODE_ENV === "development"
-const SERVER = process.env.NODE_CTX === "server" || false
-const CLIENT = process.env.NODE_CTX === "client" || true
+// const SERVER = process.env.NODE_CTX === "server"
+const CLIENT = process.env.NODE_CTX === "client"
 
 const fiber = require("fibers")
+
+console.log(CLIENT)
 
 const config = {
   mode: PROD ? ("production" as const) : ("development" as const),
@@ -67,13 +69,14 @@ const config = {
       {
         test: /\.s?(c|a)ss$/,
         use: [
-          "vue-style-loader",
-          PROD && {
-            loader: MiniCssExtract.loader,
-            options: {
-              esModule: false,
+          DEV && "vue-style-loader",
+          PROD &&
+            CLIENT && {
+              loader: MiniCssExtract.loader,
+              options: {
+                esModule: false,
+              },
             },
-          },
           {
             loader: "css-loader",
             options: {
